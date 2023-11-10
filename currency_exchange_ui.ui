@@ -76,75 +76,87 @@ QTreeView {
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
-             <widget class="QTreeWidget" name="treeWidget">
-              <property name="styleSheet">
-               <string notr="true">border: none;
-</string>
-              </property>
-              <column>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="background">
-                <color>
-                 <red>85</red>
-                 <green>255</green>
-                 <blue>255</blue>
-                </color>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Currency</string>
-               </property>
-               <property name="background">
-                <color>
-                 <red>85</red>
-                 <green>255</green>
-                 <blue>255</blue>
-                </color>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Price 1</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Price 2</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Price 3</string>
-               </property>
-              </column>
-              <item>
-               <property name="text">
-                <string>Currency Pair</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Currency Pair</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Currency Pair</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Currency Pair</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QFrame" name="frame">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>531</width>
+              <height>80</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="label">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>10</y>
+               <width>64</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_5">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>40</y>
+               <width>64</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_4">
+             <property name="geometry">
+              <rect>
+               <x>120</x>
+               <y>30</y>
+               <width>64</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_3">
+             <property name="geometry">
+              <rect>
+               <x>200</x>
+               <y>40</y>
+               <width>64</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_2">
+             <property name="geometry">
+              <rect>
+               <x>280</x>
+               <y>30</y>
+               <width>64</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </widget>
           </widget>
          </item>
          <item>
@@ -170,7 +182,7 @@ padding: 5px;</string>
             <item row="0" column="0">
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="box_exchange">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -206,7 +218,7 @@ QComboBox::drop-down {
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_2">
+               <widget class="QComboBox" name="box_currency">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -272,10 +284,21 @@ padding: 5px;
                    <enum>Qt::RightToLeft</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">
+                   <string notr="true">QPushButton{
 border: 1px solid #ddedfa;
 border-radius: 3px;
-padding: 5px;</string>
+padding: 5px;
+}
+
+QPushButton:hover{
+	background: #6bd6ce;
+	color: black;
+	font: bold;
+}
+
+QPushButton:hover:pressed{
+	background: white;
+}</string>
                   </property>
                   <property name="text">
                    <string>Add</string>
@@ -298,7 +321,7 @@ padding: 5px;</string>
                </layout>
               </item>
               <item>
-               <widget class="QRadioButton" name="radioButton">
+               <widget class="QRadioButton" name="auto_update_button">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -314,7 +337,7 @@ padding: 5px;</string>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="manual_update">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -322,13 +345,19 @@ padding: 5px;</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">border: 1px solid #ddedfa;
+                 <string notr="true">QPushButton{
+border: 1px solid #ddedfa;
 border-radius: 3px;
 padding: 5px;
-QPushButton::hover{
-	backgound: white;
+}
+QPushButton:hover{
+	background: #6bd6ce;
 	color: black;
 	font: bold;
+}
+
+QPushButton:hover:pressed{
+	background: white;
 }</string>
                 </property>
                 <property name="text">
@@ -383,7 +412,7 @@ border-radius: 10px;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="title_label">
             <property name="minimumSize">
              <size>
               <width>0</width>

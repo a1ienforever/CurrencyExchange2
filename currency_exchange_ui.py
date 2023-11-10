@@ -9,16 +9,17 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+                            QMetaObject, QObject, QPoint, QRect,
+                            QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+                           QFont, QFontDatabase, QGradient, QIcon,
+                           QImage, QKeySequence, QLinearGradient, QPainter,
+                           QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QLabel, QMainWindow,
-    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
-    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
+                               QHBoxLayout, QHeaderView, QLabel, QMainWindow,
+                               QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+                               QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -28,8 +29,8 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(818, 468))
         MainWindow.setMaximumSize(QSize(818, 468))
         MainWindow.setStyleSheet(u"background: #233340;\n"
-"color: #ddedfa;\n"
-"font-family: Ubuntu;")
+                                 "color: #ddedfa;\n"
+                                 "font-family: Ubuntu;")
         MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -48,33 +49,43 @@ class Ui_MainWindow(object):
         self.ArticleFrame.setObjectName(u"ArticleFrame")
         self.ArticleFrame.setMinimumSize(QSize(550, 0))
         self.ArticleFrame.setStyleSheet(u"border: 2px solid #ddedfa;\n"
-"border-radius: 10px;\n"
-"QTreeView {\n"
-"    background-color: #0078d4; /* \u0426\u0432\u0435\u0442 \u0444\u043e\u043d\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
-"    color: #ffffff; /* \u0426\u0432\u0435\u0442 \u0442\u0435\u043a\u0441\u0442\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
-"    border: 1px solid #ccc; /* \u0420\u0430\u043c\u043a\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
-"    font-size: 14px; /* \u0420\u0430\u0437\u043c\u0435\u0440 \u0448\u0440\u0438\u0444\u0442\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
-"}")
+                                        "border-radius: 10px;\n"
+                                        "QTreeView {\n"
+                                        "    background-color: #0078d4; /* \u0426\u0432\u0435\u0442 \u0444\u043e\u043d\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
+                                        "    color: #ffffff; /* \u0426\u0432\u0435\u0442 \u0442\u0435\u043a\u0441\u0442\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
+                                        "    border: 1px solid #ccc; /* \u0420\u0430\u043c\u043a\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
+                                        "    font-size: 14px; /* \u0420\u0430\u0437\u043c\u0435\u0440 \u0448\u0440\u0438\u0444\u0442\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 */\n"
+                                        "}")
         self.ArticleFrame.setFrameShape(QFrame.StyledPanel)
         self.ArticleFrame.setFrameShadow(QFrame.Raised)
         self.gridLayout_3 = QGridLayout(self.ArticleFrame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.treeWidget = QTreeWidget(self.ArticleFrame)
-        self.treeWidget.headerItem().setText(0, "")
-        __qtreewidgetitem = QTreeWidgetItem()
-        __qtreewidgetitem.setBackground(1, QColor(85, 255, 255));
-        __qtreewidgetitem.setBackground(0, QColor(85, 255, 255));
-        self.treeWidget.setHeaderItem(__qtreewidgetitem)
-        QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(self.treeWidget)
-        self.treeWidget.setObjectName(u"treeWidget")
-        self.treeWidget.setStyleSheet(u"border: none;\n"
-"")
+        self.tableWidget = QTableWidget(self.ArticleFrame)
+        if (self.tableWidget.columnCount() < 3):
+            self.tableWidget.setColumnCount(3)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        if (self.tableWidget.rowCount() < 3):
+            self.tableWidget.setRowCount(3)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem5)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setEnabled(False)
+        self.tableWidget.setMinimumSize(QSize(200, 300))
+        self.tableWidget.setStyleSheet(u"border: none;\n"
+                                       "background-color: none;\n"
+                                       "color: black;\n"
+                                       "")
 
-        self.gridLayout_3.addWidget(self.treeWidget, 0, 0, 1, 1)
-
+        self.gridLayout_3.addWidget(self.tableWidget, 0, 0, 1, 1)
 
         self.horizontalLayout_2.addWidget(self.ArticleFrame)
 
@@ -82,41 +93,43 @@ class Ui_MainWindow(object):
         self.AsideFrame.setObjectName(u"AsideFrame")
         self.AsideFrame.setMinimumSize(QSize(200, 0))
         self.AsideFrame.setStyleSheet(u"border: 2px solid #ddedfa;\n"
-"border-radius: 10px;\n"
-"padding: 5px;")
+                                      "border-radius: 10px;\n"
+                                      "padding: 5px;")
         self.AsideFrame.setFrameShape(QFrame.StyledPanel)
         self.AsideFrame.setFrameShadow(QFrame.Raised)
         self.gridLayout_4 = QGridLayout(self.AsideFrame)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.comboBox = QComboBox(self.AsideFrame)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setMinimumSize(QSize(0, 30))
-        self.comboBox.setStyleSheet(u"border: 1px solid #ddedfa;\n"
-"border-radius: 3px;\n"
-"padding: 5px;\n"
-"QComboBox::drop-down {\n"
-"        width: 20px; /* \u0428\u0438\u0440\u0438\u043d\u0430 \u0441\u0442\u0440\u0435\u043b\u043a\u0438 \u0432\u044b\u043f\u0430\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0441\u043f\u0438\u0441\u043a\u0430 */\n"
-"    }")
+        self.box_exchange = QComboBox(self.AsideFrame)
+        self.box_exchange.setPlaceholderText('Choose exchange')
+        self.box_exchange.addItem("")
+        self.box_exchange.addItem("")
+        self.box_exchange.addItem("")
+        self.box_exchange.setObjectName(u"box_exchange")
+        self.box_exchange.setMinimumSize(QSize(0, 30))
+        self.box_exchange.setStyleSheet(u"border: 1px solid #ddedfa;\n"
+                                        "border-radius: 3px;\n"
+                                        "padding: 5px;\n"
+                                        "QComboBox::drop-down {\n"
+                                        "        width: 20px; /* \u0428\u0438\u0440\u0438\u043d\u0430 \u0441\u0442\u0440\u0435\u043b\u043a\u0438 \u0432\u044b\u043f\u0430\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0441\u043f\u0438\u0441\u043a\u0430 */\n"
+                                        "    }")
 
-        self.verticalLayout.addWidget(self.comboBox)
+        self.verticalLayout.addWidget(self.box_exchange)
 
-        self.comboBox_2 = QComboBox(self.AsideFrame)
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.setObjectName(u"comboBox_2")
-        self.comboBox_2.setMinimumSize(QSize(0, 30))
-        self.comboBox_2.setStyleSheet(u"border: 1px solid #ddedfa;\n"
-"border-radius: 3px;\n"
-"padding: 5px;\n"
-"")
+        self.box_currency = QComboBox(self.AsideFrame)
+        self.box_currency.setPlaceholderText('Choose currency')
+        self.box_currency.addItem("")
+        self.box_currency.addItem("")
+        self.box_currency.addItem("")
+        self.box_currency.setObjectName(u"box_currency")
+        self.box_currency.setMinimumSize(QSize(0, 30))
+        self.box_currency.setStyleSheet(u"border: 1px solid #ddedfa;\n"
+                                        "border-radius: 3px;\n"
+                                        "padding: 5px;\n"
+                                        "")
 
-        self.verticalLayout.addWidget(self.comboBox_2)
+        self.verticalLayout.addWidget(self.box_currency)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -129,10 +142,21 @@ class Ui_MainWindow(object):
         self.pushButton.setMinimumSize(QSize(40, 25))
         self.pushButton.setMaximumSize(QSize(70, 40))
         self.pushButton.setLayoutDirection(Qt.RightToLeft)
-        self.pushButton.setStyleSheet(u"\n"
-"border: 1px solid #ddedfa;\n"
-"border-radius: 3px;\n"
-"padding: 5px;")
+        self.pushButton.setStyleSheet(u"QPushButton{\n"
+                                      "border: 1px solid #ddedfa;\n"
+                                      "border-radius: 3px;\n"
+                                      "padding: 5px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:hover{\n"
+                                      "	background: #6bd6ce;\n"
+                                      "	color: black;\n"
+                                      "	font: bold;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:hover:pressed{\n"
+                                      "	background: white;\n"
+                                      "}")
 
         self.horizontalLayout.addWidget(self.pushButton)
 
@@ -140,30 +164,34 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_2)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.radioButton = QRadioButton(self.AsideFrame)
-        self.radioButton.setObjectName(u"radioButton")
-        self.radioButton.setMinimumSize(QSize(0, 40))
-        self.radioButton.setStyleSheet(u"border: none;")
+        self.auto_update_button = QRadioButton(self.AsideFrame)
+        self.auto_update_button.setObjectName(u"auto_update_button")
+        self.auto_update_button.setMinimumSize(QSize(0, 40))
+        self.auto_update_button.setStyleSheet(u"border: none;")
 
-        self.verticalLayout.addWidget(self.radioButton)
+        self.verticalLayout.addWidget(self.auto_update_button)
 
-        self.pushButton_2 = QPushButton(self.AsideFrame)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setMinimumSize(QSize(0, 30))
-        self.pushButton_2.setStyleSheet(u"border: 1px solid #ddedfa;\n"
-"border-radius: 3px;\n"
-"padding: 5px;\n"
-"QPushButton::hover{\n"
-"	backgound: white;\n"
-"	color: black;\n"
-"	font: bold;\n"
-"}")
+        self.manual_update = QPushButton(self.AsideFrame)
+        self.manual_update.setObjectName(u"manual_update")
+        self.manual_update.setMinimumSize(QSize(0, 30))
+        self.manual_update.setStyleSheet(u"QPushButton{\n"
+                                         "border: 1px solid #ddedfa;\n"
+                                         "border-radius: 3px;\n"
+                                         "padding: 5px;\n"
+                                         "}\n"
+                                         "QPushButton:hover{\n"
+                                         "	background: #6bd6ce;\n"
+                                         "	color: black;\n"
+                                         "	font: bold;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover:pressed{\n"
+                                         "	background: white;\n"
+                                         "}")
 
-        self.verticalLayout.addWidget(self.pushButton_2)
-
+        self.verticalLayout.addWidget(self.manual_update)
 
         self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
@@ -171,9 +199,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addItem(self.verticalSpacer_2, 1, 0, 1, 1)
 
-
         self.horizontalLayout_2.addWidget(self.AsideFrame)
-
 
         self.gridLayout_5.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
 
@@ -182,25 +208,23 @@ class Ui_MainWindow(object):
         self.HeaderFrame.setMinimumSize(QSize(750, 70))
         self.HeaderFrame.setMaximumSize(QSize(795, 16777215))
         self.HeaderFrame.setStyleSheet(u"font: 24px;\n"
-"border: 3px solid #ddedfa;\n"
-"border-radius: 10px;")
+                                       "border: 3px solid #ddedfa;\n"
+                                       "border-radius: 10px;")
         self.HeaderFrame.setFrameShape(QFrame.StyledPanel)
         self.HeaderFrame.setFrameShadow(QFrame.Raised)
         self.gridLayout_2 = QGridLayout(self.HeaderFrame)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.label = QLabel(self.HeaderFrame)
-        self.label.setObjectName(u"label")
-        self.label.setMinimumSize(QSize(0, 50))
-        self.label.setStyleSheet(u"color: #ddedfa;\n"
-"font: 36px;\n"
-"border: none;\n"
-"")
+        self.title_label = QLabel(self.HeaderFrame)
+        self.title_label.setObjectName(u"title_label")
+        self.title_label.setMinimumSize(QSize(0, 50))
+        self.title_label.setStyleSheet(u"color: #ddedfa;\n"
+                                       "font: 36px;\n"
+                                       "border: none;\n"
+                                       "")
 
-        self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
-
+        self.gridLayout_2.addWidget(self.title_label, 0, 0, 1, 1)
 
         self.gridLayout_5.addWidget(self.HeaderFrame, 0, 0, 1, 2)
-
 
         self.gridLayout.addWidget(self.MainFrame, 0, 0, 1, 1)
 
@@ -209,41 +233,37 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MCE", None))
-        ___qtreewidgetitem = self.treeWidget.headerItem()
-        ___qtreewidgetitem.setText(4, QCoreApplication.translate("MainWindow", u"Price 3", None));
-        ___qtreewidgetitem.setText(3, QCoreApplication.translate("MainWindow", u"Price 2", None));
-        ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"Price 1", None));
-        ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Currency", None));
+        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(0)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
 
-        __sortingEnabled = self.treeWidget.isSortingEnabled()
-        self.treeWidget.setSortingEnabled(False)
-        ___qtreewidgetitem1 = self.treeWidget.topLevelItem(0)
-        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Currency Pair", None));
-        ___qtreewidgetitem2 = self.treeWidget.topLevelItem(1)
-        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Currency Pair", None));
-        ___qtreewidgetitem3 = self.treeWidget.topLevelItem(2)
-        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Currency Pair", None));
-        ___qtreewidgetitem4 = self.treeWidget.topLevelItem(3)
-        ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Currency Pair", None));
-        self.treeWidget.setSortingEnabled(__sortingEnabled)
+        self.box_exchange.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Exchange", None))
+        self.box_exchange.setItemText(0, QCoreApplication.translate("MainWindow", u"CommEX", None))
+        self.box_exchange.setItemText(1, QCoreApplication.translate("MainWindow", u"Binance", None))
+        self.box_exchange.setItemText(2, QCoreApplication.translate("MainWindow", u"TradingView", None))
 
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Exchange 1", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Exchange 2", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Exchange 3", None))
+        self.box_currency.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Currency", None))
+        self.box_currency.setItemText(0, QCoreApplication.translate("MainWindow", u"BTC(USDT)", None))
+        self.box_currency.setItemText(1, QCoreApplication.translate("MainWindow", u"ETH(USDT)", None))
+        self.box_currency.setItemText(2, QCoreApplication.translate("MainWindow", u"LTC(USDT)", None))
 
-        self.comboBox.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Exchange", None))
-        self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"Currency 1", None))
-        self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"Currency 2", None))
-        self.comboBox_2.setItemText(2, QCoreApplication.translate("MainWindow", u"Currency 3", None))
-
-        self.comboBox_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Currency", None))
+        self.box_currency.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Currency", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.radioButton.setText(QCoreApplication.translate("MainWindow", u"AutoUpdate", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Update", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Multi Currency Exchanger", None))
+        self.auto_update_button.setText(QCoreApplication.translate("MainWindow", u"AutoUpdate", None))
+        self.manual_update.setText(QCoreApplication.translate("MainWindow", u"Update", None))
+        self.title_label.setText(QCoreApplication.translate("MainWindow", u"Multi Currency Exchanger", None))
     # retranslateUi
-
