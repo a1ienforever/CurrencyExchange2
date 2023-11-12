@@ -61,14 +61,16 @@ class Ui_MainWindow(object):
         self.gridLayout_3 = QGridLayout(self.ArticleFrame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.tableWidget = QTableWidget(self.ArticleFrame)
-        if (self.tableWidget.columnCount() < 3):
-            self.tableWidget.setColumnCount(3)
+        if (self.tableWidget.columnCount() < 4):
+            self.tableWidget.setColumnCount(4)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         if (self.tableWidget.rowCount() < 3):
             self.tableWidget.setRowCount(3)
         __qtablewidgetitem3 = QTableWidgetItem()
@@ -101,21 +103,21 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.box_exchange = QComboBox(self.AsideFrame)
-        self.box_exchange.setPlaceholderText('Choose exchange')
-        self.box_exchange.addItem("")
-        self.box_exchange.addItem("")
-        self.box_exchange.addItem("")
-        self.box_exchange.setObjectName(u"box_exchange")
-        self.box_exchange.setMinimumSize(QSize(0, 30))
-        self.box_exchange.setStyleSheet(u"border: 1px solid #ddedfa;\n"
-                                        "border-radius: 3px;\n"
-                                        "padding: 5px;\n"
-                                        "QComboBox::drop-down {\n"
-                                        "        width: 20px; /* \u0428\u0438\u0440\u0438\u043d\u0430 \u0441\u0442\u0440\u0435\u043b\u043a\u0438 \u0432\u044b\u043f\u0430\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0441\u043f\u0438\u0441\u043a\u0430 */\n"
-                                        "    }")
+        # self.box_exchange = QComboBox(self.AsideFrame)
+        # self.box_exchange.setPlaceholderText('Choose exchange')
+        # self.box_exchange.addItem("")
+        # self.box_exchange.addItem("")
+        # self.box_exchange.addItem("")
+        # self.box_exchange.setObjectName(u"box_exchange")
+        # self.box_exchange.setMinimumSize(QSize(0, 30))
+        # self.box_exchange.setStyleSheet(u"border: 1px solid #ddedfa;\n"
+        #                                 "border-radius: 3px;\n"
+        #                                 "padding: 5px;\n"
+        #                                 "QComboBox::drop-down {\n"
+        #                                 "        width: 20px; /* \u0428\u0438\u0440\u0438\u043d\u0430 \u0441\u0442\u0440\u0435\u043b\u043a\u0438 \u0432\u044b\u043f\u0430\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0441\u043f\u0438\u0441\u043a\u0430 */\n"
+        #                                 "    }")
 
-        self.verticalLayout.addWidget(self.box_exchange)
+        # self.verticalLayout.addWidget(self.box_exchange)
 
         self.box_currency = QComboBox(self.AsideFrame)
         self.box_currency.setPlaceholderText('Choose currency')
@@ -239,27 +241,29 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MCE", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Binance", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"CommEX", None));
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
-        ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"OKX", None));
+        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"ByBit", None));
+        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(0)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(1)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
 
-        self.box_exchange.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Exchange", None))
-        self.box_exchange.setItemText(0, QCoreApplication.translate("MainWindow", u"CommEX", None))
-        self.box_exchange.setItemText(1, QCoreApplication.translate("MainWindow", u"Binance", None))
-        self.box_exchange.setItemText(2, QCoreApplication.translate("MainWindow", u"TradingView", None))
+        # self.box_exchange.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Exchange", None))
+        # self.box_exchange.setItemText(0, QCoreApplication.translate("MainWindow", u"CommEX", None))
+        # self.box_exchange.setItemText(1, QCoreApplication.translate("MainWindow", u"Binance", None))
+        # self.box_exchange.setItemText(2, QCoreApplication.translate("MainWindow", u"TradingView", None))
 
         self.box_currency.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Currency", None))
-        self.box_currency.setItemText(0, QCoreApplication.translate("MainWindow", u"BTC(USDT)", None))
-        self.box_currency.setItemText(1, QCoreApplication.translate("MainWindow", u"ETH(USDT)", None))
-        self.box_currency.setItemText(2, QCoreApplication.translate("MainWindow", u"LTC(USDT)", None))
+        self.box_currency.setItemText(0, QCoreApplication.translate("MainWindow", u"BTCUSDT", None))
+        self.box_currency.setItemText(1, QCoreApplication.translate("MainWindow", u"ETHUSDT", None))
+        self.box_currency.setItemText(2, QCoreApplication.translate("MainWindow", u"LTCUSDT", None))
 
         self.box_currency.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Currency", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
