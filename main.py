@@ -21,7 +21,9 @@ class CurrencyExchange(QMainWindow):
 
         self.ui.pushButton.clicked.connect(self.add_currency_pair)
         self.ui.manual_update.clicked.connect(self.manual_update)
+        self.ui.auto_update_button.clicked.connect(self.auto_update)
 
+    """
     # def parser(self):
     #     # Перенести все в массив
     #     data_binance = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT').json()
@@ -37,6 +39,7 @@ class CurrencyExchange(QMainWindow):
     #
     #     self.ui.tableWidget.horizontalHeaderItem(1).setText('CommEX')
     #     self.ui.tableWidget.setItem(0, 1, QTableWidgetItem(price_commex))
+    """
 
     def select_currency(self):
         return self.ui.box_currency.currentText()
@@ -68,6 +71,8 @@ class CurrencyExchange(QMainWindow):
         if self.row <= 10:
             selected_currency = self.select_currency()
             self.ui.tableWidget.verticalHeaderItem(self.row).setText(selected_currency)
+            """
+
             # start_time1 = time.time()
             #
             # # threading1 = threading.Thread(target=self.request_binance, args=(selected_currency, self.row))
@@ -85,6 +90,7 @@ class CurrencyExchange(QMainWindow):
             # end_time1 = time.time()
             #
             # print(f'Time1: {end_time1 - start_time1}')
+            """
 
             # multithreading----------------------------------
             start_time = time.time()
@@ -102,9 +108,20 @@ class CurrencyExchange(QMainWindow):
             print(f'Time: {end_time - start_time}')
             self.row += 1
 
-    def manual_update(self):
+    def update(self):
         i = 0
+        for key in currencies_list:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                results = [
+                    executor.submit(self.request_binance, key, i),
+                    executor.submit(self.request_mexc, key, i),
+                    executor.submit(self.request_bybit, key, i),
+                    executor.submit(self.request_commex, key, i)
+                ]
+            concurrent.futures.wait(results)
+        i += 1
 
+    def manual_update(self):
         # for key in currencies_list:
         #     if i < self.row:
         #         self.request_binance(key, i)
@@ -116,20 +133,15 @@ class CurrencyExchange(QMainWindow):
         #
 
         start = time.time()
-        for key in currencies_list:
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                results = [
-                    executor.submit(self.request_binance, key, i),
-                    executor.submit(self.request_mexc, key, i),
-                    executor.submit(self.request_bybit, key, i),
-                    executor.submit(self.request_commex, key, i)
-                ]
-            concurrent.futures.wait(results)
+        self.update()
         end = time.time()
-        i += 1
-
         print(f'Time update: {end - start}')
 
+
+""" def auto_update(self):
+     flag = True
+     while flag:
+         self.update()"""
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
