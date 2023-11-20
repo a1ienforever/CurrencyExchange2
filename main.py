@@ -21,7 +21,7 @@ class CurrencyExchange(QMainWindow):
 
         self.ui.pushButton.clicked.connect(self.add_currency_pair)
         self.ui.manual_update.clicked.connect(self.manual_update)
-        self.ui.auto_update_button.clicked.connect(self.auto_update)
+        self.ui.auto_update_button.toggled.connect(self.auto_update)
 
     """
     # def parser(self):
@@ -108,6 +108,7 @@ class CurrencyExchange(QMainWindow):
             print(f'Time: {end_time - start_time}')
             self.row += 1
 
+    # TODO: происходит обновление тольк первой строчки из-за аргумента i
     def update(self):
         i = 0
         for key in currencies_list:
@@ -133,15 +134,19 @@ class CurrencyExchange(QMainWindow):
         #
 
         start = time.time()
-        self.update()
+        if i < self.row:
+            self.update()
         end = time.time()
         print(f'Time update: {end - start}')
 
+    def auto_update(self):
+        flag_press = self.ui.auto_update_button.isChecked()
 
-""" def auto_update(self):
-     flag = True
-     while flag:
-         self.update()"""
+        if flag_press:
+            print('Func enabled')
+        else:
+            print('Func disabled')
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
