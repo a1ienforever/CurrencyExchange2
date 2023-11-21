@@ -3,7 +3,7 @@ import sys
 import threading
 import time
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from currency_exchange_ui import Ui_MainWindow
 import requests
@@ -21,7 +21,9 @@ class CurrencyExchange(QMainWindow):
 
         self.ui.pushButton.clicked.connect(self.add_currency_pair)
         self.ui.manual_update.clicked.connect(self.manual_update)
-        self.ui.auto_update_button.toggled.connect(self.auto_update)
+        self.ui.auto_update_button.toggled.connect(self.toggle_function_state)
+
+        self.running = False
 
     """
     # def parser(self):
@@ -42,7 +44,8 @@ class CurrencyExchange(QMainWindow):
     """
 
     def select_currency(self):
-        return self.ui.box_currency.currentText()
+        currency = self.ui.box_currency.currentText()
+        return currency
 
     def set_vertical_header_item(self):
         self.ui.tableWidget.verticalHeaderItem(self.row).setText()
@@ -53,8 +56,9 @@ class CurrencyExchange(QMainWindow):
         self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(price))
 
     def request_commex(self, selected_currency, row):
-        data_price = requests.get(currencies_list[selected_currency][1]).json()
-        price = f"{float(data_price['price']):.3f}"
+        data_price = requests.get(currencies_list[selected_currency][1])
+        print(data_price.headers)
+        price = f"{float(data_price.json()['price']):.3f}"
         self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(price))
 
     def request_mexc(self, selected_currency, row):
@@ -73,23 +77,23 @@ class CurrencyExchange(QMainWindow):
             self.ui.tableWidget.verticalHeaderItem(self.row).setText(selected_currency)
             """
 
-            # start_time1 = time.time()
-            #
-            # # threading1 = threading.Thread(target=self.request_binance, args=(selected_currency, self.row))
-            # self.request_binance(selected_currency, self.row)
-            #
-            # # threading2 = threading.Thread(target=self.request_commex, args=(selected_currency, self.row))
-            # self.request_commex(selected_currency, self.row)
-            #
-            # # threading3 = threading.Thread(target=self.request_mexc, args=(selected_currency, self.row))
-            # self.request_mexc(selected_currency, self.row)
-            #
-            # # threading4 = threading.Thread(target=self.request_bybit, args=(selected_currency, self.row))
-            # self.request_bybit(selected_currency, self.row)
-            #
-            # end_time1 = time.time()
-            #
-            # print(f'Time1: {end_time1 - start_time1}')
+            start_time1 = time.time()
+
+            # threading1 = threading.Thread(target=self.request_binance, args=(selected_currency, self.row))
+            self.request_binance(selected_currency, self.row)
+
+            # threading2 = threading.Thread(target=self.request_commex, args=(selected_currency, self.row))
+            self.request_commex(selected_currency, self.row)
+
+            # threading3 = threading.Thread(target=self.request_mexc, args=(selected_currency, self.row))
+            self.request_mexc(selected_currency, self.row)
+
+            # threading4 = threading.Thread(target=self.request_bybit, args=(selected_currency, self.row))
+            self.request_bybit(selected_currency, self.row)
+
+            end_time1 = time.time()
+
+            print(f'Time1: {end_time1 - start_time1}')
             """
 
             # multithreading----------------------------------
@@ -108,10 +112,9 @@ class CurrencyExchange(QMainWindow):
             print(f'Time: {end_time - start_time}')
             self.row += 1
 
-    # TODO: происходит обновление тольк первой строчки из-за аргумента i
     def update(self):
-        i = 0
-        for key in currencies_list:
+        for i in range(self.row):
+            key = self.ui.tableWidget.verticalHeaderItem(i).text()
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 results = [
                     executor.submit(self.request_binance, key, i),
@@ -120,32 +123,32 @@ class CurrencyExchange(QMainWindow):
                     executor.submit(self.request_commex, key, i)
                 ]
             concurrent.futures.wait(results)
-        i += 1
 
     def manual_update(self):
-        # for key in currencies_list:
-        #     if i < self.row:
-        #         self.request_binance(key, i)
-        #         self.request_commex(key, i)
-        #         self.request_mexc(key, i)
-        #         i += 1
-        #     else:
-        #         break
-        #
+        """
+        for key in currencies_list:
+             if i < self.row:
+                 self.request_binance(key, i)
+                 self.request_commex(key, i)
+                 self.request_mexc(key, i)
+                 i += 1
+             else:
+                 break"""
 
         start = time.time()
-        if i < self.row:
-            self.update()
+        self.update()
         end = time.time()
         print(f'Time update: {end - start}')
 
     def auto_update(self):
-        flag_press = self.ui.auto_update_button.isChecked()
+        while self.ui.auto_update_button.isChecked():
+            self.update()
+            time.sleep(2)
 
-        if flag_press:
-            print('Func enabled')
-        else:
-            print('Func disabled')
+    def toggle_function_state(self, state):
+        if state:
+            thread = threading.Thread(target=self.auto_update)
+            thread.start()
 
 
 if __name__ == "__main__":

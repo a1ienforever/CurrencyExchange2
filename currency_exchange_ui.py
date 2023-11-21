@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
                                QHBoxLayout, QHeaderView, QLabel, QMainWindow,
                                QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
-                               QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+                               QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QCheckBox)
 
 
 class Ui_MainWindow(object):
