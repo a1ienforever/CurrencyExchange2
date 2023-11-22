@@ -4,9 +4,10 @@ import threading
 import time
 
 from PySide6.QtCore import Qt, QCoreApplication
-from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from currency_exchange_ui import Ui_MainWindow
 import requests
+import error_window
 from data import currencies_list
 import data
 
@@ -74,55 +75,40 @@ class CurrencyExchange(QMainWindow):
     def add_currency_pair(self):
         if self.row <= 10:
             selected_currency = self.select_currency()
-            self.ui.tableWidget.verticalHeaderItem(self.row).setText(selected_currency)
-            """
+            if selected_currency == "":
+                QMessageBox.critical(self, "Error", "Please, Choose a Currency")
+            else:
+                self.ui.tableWidget.verticalHeaderItem(self.row).setText(selected_currency)
+                # multithreading----------------------------------
+                start_time = time.time()
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    results = [
+                        executor.submit(self.request_binance, selected_currency, self.row),
+                        executor.submit(self.request_mexc, selected_currency, self.row),
+                        executor.submit(self.request_bybit, selected_currency, self.row),
+                        executor.submit(self.request_commex, selected_currency, self.row)
+                    ]
 
-            start_time1 = time.time()
+                    concurrent.futures.wait(results)
+                end_time = time.time()
 
-            # threading1 = threading.Thread(target=self.request_binance, args=(selected_currency, self.row))
-            self.request_binance(selected_currency, self.row)
-
-            # threading2 = threading.Thread(target=self.request_commex, args=(selected_currency, self.row))
-            self.request_commex(selected_currency, self.row)
-
-            # threading3 = threading.Thread(target=self.request_mexc, args=(selected_currency, self.row))
-            self.request_mexc(selected_currency, self.row)
-
-            # threading4 = threading.Thread(target=self.request_bybit, args=(selected_currency, self.row))
-            self.request_bybit(selected_currency, self.row)
-
-            end_time1 = time.time()
-
-            print(f'Time1: {end_time1 - start_time1}')
-            """
-
-            # multithreading----------------------------------
-            start_time = time.time()
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                results = [
-                    executor.submit(self.request_binance, selected_currency, self.row),
-                    executor.submit(self.request_mexc, selected_currency, self.row),
-                    executor.submit(self.request_bybit, selected_currency, self.row),
-                    executor.submit(self.request_commex, selected_currency, self.row)
-                ]
-
-                concurrent.futures.wait(results)
-            end_time = time.time()
-
-            print(f'Time: {end_time - start_time}')
-            self.row += 1
+                print(f'Time: {end_time - start_time}')
+                self.row += 1
 
     def update(self):
-        for i in range(self.row):
-            key = self.ui.tableWidget.verticalHeaderItem(i).text()
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                results = [
-                    executor.submit(self.request_binance, key, i),
-                    executor.submit(self.request_mexc, key, i),
-                    executor.submit(self.request_bybit, key, i),
-                    executor.submit(self.request_commex, key, i)
-                ]
-            concurrent.futures.wait(results)
+        if self.row < 1:
+            QMessageBox.critical(self, 'Error', 'Please, add currencies!')
+        else:
+            for i in range(self.row):
+                key = self.ui.tableWidget.verticalHeaderItem(i).text()
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    results = [
+                        executor.submit(self.request_binance, key, i),
+                        executor.submit(self.request_mexc, key, i),
+                        executor.submit(self.request_bybit, key, i),
+                        executor.submit(self.request_commex, key, i)
+                    ]
+                concurrent.futures.wait(results)
 
     def manual_update(self):
         """
@@ -140,7 +126,11 @@ class CurrencyExchange(QMainWindow):
         end = time.time()
         print(f'Time update: {end - start}')
 
+    # TODO: допилить окно с ошибкой
     def auto_update(self):
+        if self.row < 1:
+            QMessageBox.critical(self, 'Error', 'Please, add currencies!')
+            return ''
         while self.ui.auto_update_button.isChecked():
             self.update()
             time.sleep(2)
