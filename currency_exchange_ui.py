@@ -115,22 +115,8 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        # self.box_exchange = QComboBox(self.AsideFrame)
-        # self.box_exchange.setPlaceholderText('Choose exchange')
-        # self.box_exchange.addItem("")
-        # self.box_exchange.addItem("")
-        # self.box_exchange.addItem("")
-        # self.box_exchange.setObjectName(u"box_exchange")
-        # self.box_exchange.setMinimumSize(QSize(0, 30))
-        # self.box_exchange.setStyleSheet(u"border: 1px solid #ddedfa;\n"
-        #                                 "border-radius: 3px;\n"
-        #                                 "padding: 5px;\n"
-        #                                 "QComboBox::drop-down {\n"
-        #                                 "        width: 20px; /* \u0428\u0438\u0440\u0438\u043d\u0430 \u0441\u0442\u0440\u0435\u043b\u043a\u0438 \u0432\u044b\u043f\u0430\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0441\u043f\u0438\u0441\u043a\u0430 */\n"
-        #                                 "    }")
 
-        # self.verticalLayout.addWidget(self.box_exchange)
-
+        # Combo Box for currency------------------------------
         self.box_currency = QComboBox(self.AsideFrame)
         self.box_currency.setPlaceholderText('Choose currency')
         self.box_currency.addItem("")
@@ -151,6 +137,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
+        # Add currency button-------------------------------
         self.pushButton = QPushButton(self.AsideFrame)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setMinimumSize(QSize(40, 25))
@@ -180,6 +167,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
+        # Auto Update button---------------------------------
         self.auto_update_button = QRadioButton(self.AsideFrame)
         self.auto_update_button.setObjectName(u"auto_update_button")
         self.auto_update_button.setMinimumSize(QSize(0, 40))
@@ -187,6 +175,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.auto_update_button)
 
+        # Manual update button-------------------------------
         self.manual_update = QPushButton(self.AsideFrame)
         self.manual_update.setObjectName(u"manual_update")
         self.manual_update.setMinimumSize(QSize(0, 30))
@@ -206,6 +195,27 @@ class Ui_MainWindow(object):
                                          "}")
 
         self.verticalLayout.addWidget(self.manual_update)
+
+        # Button converter------------------------------------
+        self.converter_button = QPushButton(self.AsideFrame)
+        self.converter_button.setObjectName(u"converter_button")
+        self.converter_button.setLayoutDirection(Qt.RightToLeft)
+        self.converter_button.setStyleSheet(u"QPushButton{\n"
+                                            "border: 1px solid #ddedfa;\n"
+                                            "border-radius: 3px;\n"
+                                            "padding: 5px;\n"
+                                            "}\n"
+                                            "QPushButton:hover{\n"
+                                            "	background: #6bd6ce;\n"
+                                            "	color: black;\n"
+                                            "	font: bold;\n"
+                                            "}\n"
+                                            "\n"
+                                            "QPushButton:hover:pressed{\n"
+                                            "	background: white;\n"
+                                            "}")
+
+        self.verticalLayout.addWidget(self.converter_button)
 
         self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
@@ -294,4 +304,4 @@ class Ui_MainWindow(object):
         self.auto_update_button.setText(QCoreApplication.translate("MainWindow", u"AutoUpdate", None))
         self.manual_update.setText(QCoreApplication.translate("MainWindow", u"Update", None))
         self.title_label.setText(QCoreApplication.translate("MainWindow", u"Multi Currency Exchanger", None))
-    # retranslateUi
+        self.converter_button.setText(QCoreApplication.translate("MainWindow", u"Converter", None))

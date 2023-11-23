@@ -7,15 +7,29 @@ from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from currency_exchange_ui import Ui_MainWindow
 import requests
-import error_window
+import converter_ui
 from data import currencies_list
 import data
+
+
+class Converter(QMainWindow):
+    def __init__(self):
+        super(Converter, self).__init__()
+        self.ui = converter_ui.Ui_Converter()
+        self.ui.setupUi(self)
+
+    def open_converter(self):
+        app2 = QApplication(sys.argv)
+        window2 = Converter()
+        window2.show()
+        sys.exit(app2.exec())
 
 
 class CurrencyExchange(QMainWindow):
 
     def __init__(self):
         self.row = 0
+        self.converter = None
         super(CurrencyExchange, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -23,8 +37,7 @@ class CurrencyExchange(QMainWindow):
         self.ui.pushButton.clicked.connect(self.add_currency_pair)
         self.ui.manual_update.clicked.connect(self.manual_update)
         self.ui.auto_update_button.toggled.connect(self.toggle_function_state)
-
-        self.running = False
+        self.ui.converter_button.clicked.connect(self.open_converter_window)
 
     """
     # def parser(self):
@@ -140,10 +153,16 @@ class CurrencyExchange(QMainWindow):
             thread = threading.Thread(target=self.auto_update)
             thread.start()
 
+    def open_converter_window(self):
+
+        self.converter = Converter()
+        self.converter.show()
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = CurrencyExchange()
-    window.setWindowFlags(window.windowFlags() | Qt.WindowStaysOnTopHint)
+    # window.setWindowFlags(window.windowFlags() | Qt.WindowStaysOnTopHint)
     window.show()
     sys.exit(app.exec())
