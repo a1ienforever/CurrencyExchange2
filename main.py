@@ -9,13 +9,7 @@ from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from currency_exchange_ui import Ui_MainWindow
 from data import currencies_list
-
-
-class Converter(QMainWindow):
-    def __init__(self):
-        super(Converter, self).__init__()
-        self.ui = converter_ui.Ui_MainWindow()
-        self.ui.setupUi(self)
+from Converter import Converter
 
 
 class CurrencyExchange(QMainWindow):
@@ -132,7 +126,6 @@ class CurrencyExchange(QMainWindow):
         end = time.time()
         print(f'Time update: {end - start}')
 
-    # TODO: допилить окно с ошибкой
     def auto_update(self):
         if self.row < 1:
             QMessageBox.critical(self, 'Error', 'Please, add currencies!')
@@ -148,6 +141,7 @@ class CurrencyExchange(QMainWindow):
 
     def open_converter_window(self):
         self.converter = Converter()
+        self.converter.setWindowFlag(self.converter.windowFlags() | Qt.WindowStaysOnTopHint)
         self.converter.show()
 
 
