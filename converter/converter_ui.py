@@ -8,17 +8,10 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect,
-                            QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-                           QFont, QFontDatabase, QGradient, QIcon,
-                           QImage, QKeySequence, QLinearGradient, QPainter,
-                           QPalette, QPixmap, QRadialGradient, QTransform, QIntValidator)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-                               QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-                               QPushButton, QSizePolicy, QWidget)
-from Converter import Converter
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt)
+from PySide6.QtGui import (QIntValidator)
+from PySide6.QtWidgets import (QComboBox, QFrame, QGridLayout,
+                               QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget)
 
 
 class Ui_MainWindow(object):

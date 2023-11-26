@@ -3,13 +3,12 @@ import sys
 import threading
 import time
 import requests
-import converter_ui
 
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 from currency_exchange_ui import Ui_MainWindow
 from data import currencies_list
-from Converter import Converter
+from converter.Converter import Converter
 
 
 class CurrencyExchange(QMainWindow):

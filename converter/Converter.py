@@ -1,5 +1,3 @@
-import concurrent.futures
-
 import requests
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 
