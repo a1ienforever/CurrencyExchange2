@@ -6,9 +6,11 @@ import requests
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
+
+from Table import Table
 from currency_exchange_ui import Ui_MainWindow
 from data import currencies_list
-from converter.Converter import Converter
+from Converter import Converter
 
 
 class CurrencyExchange(QMainWindow):
@@ -25,7 +27,7 @@ class CurrencyExchange(QMainWindow):
         self.ui.auto_update_button.toggled.connect(self.toggle_function_state)
         self.ui.converter_button.clicked.connect(self.open_converter_window)
 
-    """
+
     # def parser(self):
     #     # Перенести все в массив
     #     data_binance = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT').json()
@@ -41,7 +43,7 @@ class CurrencyExchange(QMainWindow):
     #
     #     self.ui.tableWidget.horizontalHeaderItem(1).setText('CommEX')
     #     self.ui.tableWidget.setItem(0, 1, QTableWidgetItem(price_commex))
-    """
+
 
     def select_currency(self):
         currency = self.ui.box_currency.currentText()
@@ -142,6 +144,11 @@ class CurrencyExchange(QMainWindow):
         self.converter = Converter()
         self.converter.setWindowFlag(self.converter.windowFlags() | Qt.WindowStaysOnTopHint)
         self.converter.show()
+
+        self.table = Table()
+        self.table.setWindowFlag(self.table.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.table.show()
+
 
 
 if __name__ == "__main__":

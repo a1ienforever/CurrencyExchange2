@@ -1,22 +1,26 @@
 import requests
+from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 
 import converter_ui
+from Table import Table
 from data import currencies_list
 from bs4 import BeautifulSoup
 
-
 class Converter(QMainWindow):
-    bank = ''
+    # TODO: необходимо оптимизировать код
 
     def __init__(self):
+        self.table_window = None
         self.usd_price = 0
         self.bank = ''
         self.result = 0
+        self.table = Table()
         super(Converter, self).__init__()
         self.ui = converter_ui.Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.convert_button.clicked.connect(self.set_result)
+
 
     def parse_usd_price(self):
         url = 'https://www.sravni.ru/valjuty/cb-rf/usd/'
@@ -56,6 +60,7 @@ class Converter(QMainWindow):
         if rub == '':
             QMessageBox.critical(self, 'Error!', "Введите сумму для конвертации!")
         else:
+
             return float(rub)
 
     def convert_to_crypt(self):
@@ -65,8 +70,15 @@ class Converter(QMainWindow):
 
         usd = rub / usd_price
         result = usd / crypt
+
         return result
 
     def set_result(self):
         self.convert_to_crypt()
         self.ui.output_result.setText(str(self.convert_to_crypt()))
+        # self.open_table_window()
+
+    # def open_table_window(self):
+    #     self.table_window = Table()
+    #     self.table_window.setWindowFlag(self.table_window.windowFlags() | Qt.WindowStaysOnTopHint)
+    #     self.table_window.show()
