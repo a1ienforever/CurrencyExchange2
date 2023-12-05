@@ -17,7 +17,7 @@ class Converter(QMainWindow):
         self.result = 0
         self.table = Table()
         super(Converter, self).__init__()
-        self.ui = converter_ui.Ui_MainWindow()
+        self.ui = converter_ui.Converter_MainWindow()
         self.ui.setupUi(self)
         self.ui.convert_button.clicked.connect(self.set_result)
 

@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
                                QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QCheckBox)
 
 
-class Ui_MainWindow(object):
+class Exchanger_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -139,7 +139,7 @@ class Ui_MainWindow(object):
 
         # Add currency button-------------------------------
         self.pushButton = QPushButton(self.AsideFrame)
-        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setObjectName(u"date_search")
         self.pushButton.setMinimumSize(QSize(40, 25))
         self.pushButton.setMaximumSize(QSize(70, 40))
         self.pushButton.setLayoutDirection(Qt.RightToLeft)

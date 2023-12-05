@@ -8,7 +8,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 
 from Table import Table
-from currency_exchange_ui import Ui_MainWindow
+from currency_exchange_ui import Exchanger_MainWindow
 from data import currencies_list
 from Converter import Converter
 
@@ -19,7 +19,7 @@ class CurrencyExchange(QMainWindow):
         self.row = 0
         self.converter = None
         super(CurrencyExchange, self).__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = Exchanger_MainWindow()
         self.ui.setupUi(self)
 
         self.ui.pushButton.clicked.connect(self.add_currency_pair)

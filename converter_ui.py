@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (QComboBox, QFrame, QGridLayout,
                                QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget)
 
 
-class Ui_MainWindow(object):
+class Converter_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
