@@ -1,31 +1,31 @@
+from datetime import datetime
+
 import requests
 from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 
 import converter_ui
-from Table import Table
 from data import currencies_list
 from bs4 import BeautifulSoup
+
 
 class Converter(QMainWindow):
     # TODO: необходимо оптимизировать код
 
     def __init__(self):
         self.table_window = None
+        self.rub = 0
         self.usd_price = 0
         self.bank = ''
         self.result = 0
-        self.table = Table()
         super(Converter, self).__init__()
         self.ui = converter_ui.Converter_MainWindow()
         self.ui.setupUi(self)
         self.ui.convert_button.clicked.connect(self.set_result)
 
-
     def parse_usd_price(self):
         url = 'https://www.sravni.ru/valjuty/cb-rf/usd/'
         response = requests.get(url)
-
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
             tags = soup.find_all('div', class_='styles_value-text__JklK4 _5gmjom')
@@ -70,7 +70,7 @@ class Converter(QMainWindow):
 
         usd = rub / usd_price
         result = usd / crypt
-
+        self.result = result
         return result
 
     def set_result(self):
@@ -82,3 +82,16 @@ class Converter(QMainWindow):
     #     self.table_window = Table()
     #     self.table_window.setWindowFlag(self.table_window.windowFlags() | Qt.WindowStaysOnTopHint)
     #     self.table_window.show()
+
+    def get_datetime(self):
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%d.%m.%Y %H:%M")
+        return formatted_datetime
+
+    # def get_result(self):
+    #     rub = 123
+    #     usd = self.usd_price
+    #     crypt = self.result
+    #     bank = self.bank
+    #     date = self.get_datetime()
+    #     print(date + ':', f'rub -> {usd} usd -> {crypt}{self.select_currency()} Bank: {bank}')

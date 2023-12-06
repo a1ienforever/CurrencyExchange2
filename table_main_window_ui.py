@@ -22,6 +22,7 @@ from PySide6.QtWidgets import (QApplication, QDateEdit, QFrame, QGridLayout,
 
 class Table_MainWindow(object):
     listPrice = None
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -56,20 +57,20 @@ class Table_MainWindow(object):
         self.date_search.setMinimumSize(QSize(0, 30))
         self.date_search.setMaximumSize(QSize(400, 100))
         self.date_search.setStyleSheet(u"QPushButton{\n"
-                                      "border: 1px solid #ddedfa;\n"
-                                      "border-radius: 3px;\n"
-                                      "padding: 5px;\n"
-                                      "}\n"
-                                      "\n"
-                                      "QPushButton:hover{\n"
-                                      "background: #6bd6ce;\n"
-                                      "color: black;\n"
-                                      "font: bold;\n"
-                                      "}\n"
-                                      "\n"
-                                      "QPushButton:hover:pressed{\n"
-                                      "background: white;\n"
-                                      "}")
+                                       "border: 1px solid #ddedfa;\n"
+                                       "border-radius: 3px;\n"
+                                       "padding: 5px;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:hover{\n"
+                                       "background: #6bd6ce;\n"
+                                       "color: black;\n"
+                                       "font: bold;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:hover:pressed{\n"
+                                       "background: white;\n"
+                                       "}")
 
         self.horizontalLayout.addWidget(self.date_search)
 
@@ -103,7 +104,5 @@ class Table_MainWindow(object):
         self.listPrice.setSortingEnabled(__sortingEnabled)
 
         self.date_search.setText(QCoreApplication.translate("MainWindow",
-                                                           u"\u041f\u043e\u0438\u0441\u043a \u043f\u043e \u0414\u0430\u0442\u0435",
+                                                            u"\u041f\u043e\u0438\u0441\u043a \u043f\u043e \u0414\u0430\u0442\u0435",
                                                             None))
-
-
