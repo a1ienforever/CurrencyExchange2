@@ -13,10 +13,12 @@ class Converter(QMainWindow):
     # TODO: необходимо оптимизировать код
 
     def __init__(self):
+        self.usd = None
         self.table_window = None
         self.rub = 0
         self.usd_price = 0
-        self.bank = ''
+        self.name_bank = ''
+        self.name_crypt = ''
         self.result = 0
         super(Converter, self).__init__()
         self.ui = converter_ui.Converter_MainWindow()
@@ -32,7 +34,7 @@ class Converter(QMainWindow):
             value = tags[1].text
             new_val = value.replace(',', '.')
 
-            self.bank = tags[1].parent.find_next('a').text
+            self.name_bank = tags[1].parent.find_next('a').text
 
             usd_price = float(new_val[0:5])
             return usd_price
@@ -56,42 +58,36 @@ class Converter(QMainWindow):
                 return float(price_crypt)
 
     def get_rub(self):
-        rub = self.ui.input_rub.text()
-        if rub == '':
+        self.rub = self.ui.input_rub.text()
+        if self.rub == '':
             QMessageBox.critical(self, 'Error!', "Введите сумму для конвертации!")
         else:
 
-            return float(rub)
+            return float(self.rub)
 
     def convert_to_crypt(self):
-        rub = self.get_rub()
-        usd_price = self.parse_usd_price()
-        crypt = self.request_exchange()
+        self.rub = self.get_rub()
+        self.usd_price = self.parse_usd_price()
+        self.name_crypt = self.request_exchange()
 
-        usd = rub / usd_price
-        result = usd / crypt
+        self.usd = self.rub / self.usd_price
+        result = self.usd / self.name_crypt
         self.result = result
         return result
 
     def set_result(self):
         self.convert_to_crypt()
         self.ui.output_result.setText(str(self.convert_to_crypt()))
-        # self.open_table_window()
-
-    # def open_table_window(self):
-    #     self.table_window = Table()
-    #     self.table_window.setWindowFlag(self.table_window.windowFlags() | Qt.WindowStaysOnTopHint)
-    #     self.table_window.show()
 
     def get_datetime(self):
         current_datetime = datetime.now()
         formatted_datetime = current_datetime.strftime("%d.%m.%Y %H:%M")
         return formatted_datetime
 
-    # def get_result(self):
-    #     rub = 123
-    #     usd = self.usd_price
-    #     crypt = self.result
-    #     bank = self.bank
-    #     date = self.get_datetime()
-    #     print(date + ':', f'rub -> {usd} usd -> {crypt}{self.select_currency()} Bank: {bank}')
+    def get_result(self):
+        rub = self.rub
+        usd = self.usd
+        crypt = self.result
+        bank = self.name_bank
+        date = self.get_datetime()
+        return f"{date}: {rub} rub -> {usd} usd -> {crypt}{self.select_currency()} Bank: {bank}"

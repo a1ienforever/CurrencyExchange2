@@ -8,7 +8,7 @@ from Converter import Converter
 
 class Table(QMainWindow):
     i = 0
-
+    # converter = Converter()
     def __init__(self):
         self.converter = Converter()
         super(Table, self).__init__()
@@ -17,11 +17,9 @@ class Table(QMainWindow):
         self.ui.date_search.clicked.connect(self.new_item)
 
     def new_item(self):
-        text = f'New Element {self.i}'
+        text = str(self.converter.get_result())
         self.ui.listPrice.addItem(text)
         self.i += 1
-
-        self.converter.get_result()
 
     def get_datetime(self):
         current_datetime = datetime.datetime.now()
