@@ -1,13 +1,13 @@
+import sqlite3
 from datetime import datetime
 
 import requests
-from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 
 import converter_ui
 from data import currencies_list
 from bs4 import BeautifulSoup
-
+from DataBase import DataBase
 
 class Converter(QMainWindow):
     # TODO: необходимо оптимизировать код
@@ -20,9 +20,11 @@ class Converter(QMainWindow):
         self.name_bank = ''
         self.name_crypt = ''
         self.result = 0
+        self.db = DataBase()
         super(Converter, self).__init__()
         self.ui = converter_ui.Converter_MainWindow()
         self.ui.setupUi(self)
+        self.db.start_database()
         self.ui.convert_button.clicked.connect(self.set_result)
 
     def parse_usd_price(self):
@@ -73,6 +75,7 @@ class Converter(QMainWindow):
         self.usd = self.rub / self.usd_price
         result = self.usd / self.name_crypt
         self.result = result
+        self.record_to_db(self.get_datetime(),self.rub, self.usd_price, self.result)
         return result
 
     def set_result(self):
@@ -90,4 +93,16 @@ class Converter(QMainWindow):
         crypt = self.result
         bank = self.name_bank
         date = self.get_datetime()
+        # self.record_to_db(self.get_datetime(), rub, usd, crypt)
         return f"{date}: {rub} rub -> {usd} usd -> {crypt}{self.select_currency()} Bank: {bank}"
+
+    def record_to_db(self, datetime, rub, usd, crypt):
+        with sqlite3.connect('database.db') as db:
+            cursor = db.cursor()
+            cursor.execute(f"SELECT datetime FROM conversion WHERE datetime = '{datetime}'")
+            if cursor.fetchone() is None:
+                cursor.execute(f"INSERT INTO conversion VALUES(?,?,?,?)", (datetime, rub, usd, crypt))
+                print('Запись сделана!')
+            else:
+                print("Error!")
+
