@@ -41,19 +41,6 @@ font-family: Ubuntu;</string>
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QListWidget" name="listPrice">
-         <property name="styleSheet">
-          <string notr="true">font: 24px;
-border: 3px white solid</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>05/12/2023 21:45: RUB(1000) -&gt; USD(10) -&gt; Crypt(0.00000001)</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -103,6 +90,9 @@ background: white;
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="0" column="0">
+        <widget class="QListWidget" name="listWidget"/>
        </item>
       </layout>
      </widget>

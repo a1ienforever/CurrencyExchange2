@@ -163,6 +163,3 @@ class Converter_MainWindow(object):
                                                         u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0431\u0438\u0440\u0436\u0443:",
                                                         None))
         self.convert_button.setText(QCoreApplication.translate("MainWindow", u"Convert", None))
-
-        self.footer.setText(u'Перевод осуществлен с условием выгодного обмена доллара \n'
-                            u'через банк')

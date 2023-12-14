@@ -1,10 +1,12 @@
+import concurrent.futures
 import sqlite3
 from datetime import datetime
 
 import requests
 from PySide6.QtWidgets import QMainWindow, QMessageBox
-
+from PySide6.QtCore import Qt
 import converter_ui
+import table_main_window_ui
 from Table import Table
 from data import currencies_list
 from bs4 import BeautifulSoup
@@ -12,11 +14,11 @@ from DataBase import DataBase
 
 
 class Converter(QMainWindow):
-    # TODO: необходимо оптимизировать код
-
     def __init__(self):
         self.table_item = None
         self.table = Table()
+        self.table.setWindowFlag(self.table.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.table.show()
         self.usd = None
         self.table_window = None
         self.name_bank = ''
@@ -66,30 +68,32 @@ class Converter(QMainWindow):
             QMessageBox.critical(self, 'Error!', "Введите сумму для конвертации!")
         else:
             return float(rub)
-#TODO: создать threadpool
+
+    # TODO: создать threadpool
     def convert_to_crypt(self):
         rub = self.get_rub()
         usd_price = self.parse_usd_price()
         name_crypt = self.request_exchange()
-
         usd = rub / usd_price
         result = usd / name_crypt
+
         self.record_to_db(self.get_datetime(), rub, usd_price, result)
-        self.table_item = self.get_result(self.get_datetime(), rub, usd_price, result, self.name_bank)
+        self.table_item = self.get_result(rub, usd_price, result, self.name_bank)
+        self.set_lable_text(self.table_item)
+        self.table.add_item(self.table_item)
         return result
 
     def set_result(self):
         string = self.convert_to_crypt()
-        self.ui.output_result.setText(str(string))
-        self.table.new_item(self.table_item)
+        self.ui.output_result.setText(str(f"{string:.5f}"))
 
     def get_datetime(self):
         current_datetime = datetime.now()
         formatted_datetime = current_datetime.strftime("%d.%m.%Y %H:%M")
         return formatted_datetime
 
-    def get_result(self, datetime, rub, usd, crypt, bank):
-        return f"{datetime}: {rub} rub -> {usd} usd -> {crypt}{self.select_currency()} Bank: {bank}"
+    def get_result(self, rub, usd, crypt, bank):
+        return f"{rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()} \n Bank: {bank}"
 
     def record_to_db(self, datetime, rub, usd, crypt):
         with sqlite3.connect('database.db') as db:
@@ -101,3 +105,6 @@ class Converter(QMainWindow):
                 print('Запись сделана!')
             else:
                 print("Error!")
+
+    def set_lable_text(self, text):
+        self.ui.footer.setText(text)

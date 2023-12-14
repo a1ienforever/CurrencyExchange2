@@ -110,16 +110,6 @@ class CurrencyExchange(QMainWindow):
                 concurrent.futures.wait(results)
 
     def manual_update(self):
-        """
-        for key in currencies_list:
-             if i < self.row:
-                 self.request_binance(key, i)
-                 self.request_commex(key, i)
-                 self.request_mexc(key, i)
-                 i += 1
-             else:
-                 break"""
-
         start = time.time()
         self.update()
         end = time.time()
@@ -143,9 +133,6 @@ class CurrencyExchange(QMainWindow):
         self.converter.setWindowFlag(self.converter.windowFlags() | Qt.WindowStaysOnTopHint)
         self.converter.show()
 
-        self.table = Table()
-        self.table.setWindowFlag(self.table.windowFlags() | Qt.WindowStaysOnTopHint)
-        self.table.show()
 
 
 if __name__ == "__main__":
