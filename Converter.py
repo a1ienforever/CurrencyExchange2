@@ -76,10 +76,10 @@ class Converter(QMainWindow):
         name_crypt = self.request_exchange()
         usd = rub / usd_price
         result = usd / name_crypt
-
-        self.record_to_db(self.get_datetime(), rub, usd_price, result)
-        self.table_item = self.get_result(rub, usd_price, result, self.name_bank)
-        self.set_lable_text(self.table_item)
+        date_time = self.get_datetime()
+        self.record_to_db(date_time, rub, usd_price, result)
+        self.table_item = self.get_result(date_time, rub, usd_price, result)
+        self.set_lable_text(self.name_bank)
         self.table.add_item(self.table_item)
         return result
 
@@ -92,19 +92,22 @@ class Converter(QMainWindow):
         formatted_datetime = current_datetime.strftime("%d.%m.%Y %H:%M")
         return formatted_datetime
 
-    def get_result(self, rub, usd, crypt, bank):
-        return f"{rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()} \n Bank: {bank}"
+    def get_result(self, datetime, rub, usd, crypt):
+        return f"{datetime} {rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()}"
 
     def record_to_db(self, datetime, rub, usd, crypt):
         with sqlite3.connect('database.db') as db:
             cursor = db.cursor()
             cursor.execute(f"SELECT datetime FROM conversion WHERE datetime = '{datetime}'")
             if cursor.fetchone() is None:
-                cursor.execute(f"INSERT INTO conversion VALUES(?,?,?,?)", (datetime, rub, usd, crypt))
+                cursor.execute(f"INSERT INTO conversion VALUES(?,?,?,?,?)",
+                               (datetime, rub, usd, crypt, self.select_currency()))
                 db.commit()
                 print('Запись сделана!')
             else:
                 print("Error!")
 
     def set_lable_text(self, text):
-        self.ui.footer.setText(text)
+        str = (f'Перевод в доллары выполнен через банк {text}.\n'
+               f'{self.table_item}')
+        self.ui.footer.setText(str)

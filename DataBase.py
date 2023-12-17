@@ -9,5 +9,8 @@ class DataBase:
                 datetime DATETIME,
                 rub INT,
                 usd INT,
-                crypt INT
+                crypt INT,
+                name_crypt TEXT
                 )""")
+
+
