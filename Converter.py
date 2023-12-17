@@ -67,7 +67,7 @@ class Converter(QMainWindow):
         if rub == '':
             QMessageBox.critical(self, 'Error!', "Введите сумму для конвертации!")
         else:
-            return float(rub)
+            return int(rub)
 
     # TODO: создать threadpool
     def convert_to_crypt(self):
