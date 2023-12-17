@@ -7,7 +7,6 @@ import requests
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 
-from Table import Table
 from currency_exchange_ui import Exchanger_MainWindow
 from data import currencies_list
 from Converter import Converter

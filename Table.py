@@ -1,6 +1,6 @@
 import datetime
 
-from PyQt5.QtCore import QCoreApplication
+
 from PySide6.QtWidgets import QMainWindow, QListWidgetItem, QTreeWidget, QTreeWidgetItem
 
 import table_main_window_ui
@@ -21,7 +21,7 @@ class Table(QMainWindow):
 
     def update_list(self):
         import sqlite3
-        with sqlite3.connect('database.db') as db:
+        with sqlite3.connect('identifier.sqlite') as db:
             cursor = db.cursor()
             cursor.execute('SELECT * FROM conversion')
             items = cursor.fetchall()

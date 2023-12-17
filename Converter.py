@@ -96,7 +96,7 @@ class Converter(QMainWindow):
         return f"{datetime} {rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()}"
 
     def record_to_db(self, datetime, rub, usd, crypt):
-        with sqlite3.connect('database.db') as db:
+        with sqlite3.connect('identifier.sqlite') as db:
             cursor = db.cursor()
             cursor.execute(f"SELECT datetime FROM conversion WHERE datetime = '{datetime}'")
             if cursor.fetchone() is None:
