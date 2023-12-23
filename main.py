@@ -70,6 +70,11 @@ class CurrencyExchange(QMainWindow):
         price = f"{float(data_price['result']['price']):.3f}"
         self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(price))
 
+    def request_bingx(self, selected_currency, row):
+        data_price = requests.get(currencies_list[selected_currency][4]).json()
+        price = f"{float(data_price['data']['price']):.3f}"
+        self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(price))
+
     def add_currency_pair(self):
         if self.row <= 10:
             selected_currency = self.select_currency()
@@ -84,7 +89,8 @@ class CurrencyExchange(QMainWindow):
                         executor.submit(self.request_binance, selected_currency, self.row),
                         executor.submit(self.request_mexc, selected_currency, self.row),
                         executor.submit(self.request_bybit, selected_currency, self.row),
-                        executor.submit(self.request_commex, selected_currency, self.row)
+                        executor.submit(self.request_commex, selected_currency, self.row),
+                        executor.submit(self.request_bingx, selected_currency, self.row)
                     ]
 
                     concurrent.futures.wait(results)

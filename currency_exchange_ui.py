@@ -61,8 +61,8 @@ class Exchanger_MainWindow(object):
         self.gridLayout_3 = QGridLayout(self.ArticleFrame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.tableWidget = QTableWidget(self.ArticleFrame)
-        if (self.tableWidget.columnCount() < 4):
-            self.tableWidget.setColumnCount(4)
+        if (self.tableWidget.columnCount() < 5):
+            self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -71,6 +71,8 @@ class Exchanger_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         if self.tableWidget.rowCount() < 9:
             self.tableWidget.setRowCount(9)
         __qtablewidgetitem3 = QTableWidgetItem()
@@ -270,24 +272,26 @@ class Exchanger_MainWindow(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"MEXC", None));
         ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"ByBit", None));
-        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"1", None));
-        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"2", None));
-        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(2)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"3", None));
-        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(3)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"4", None));
-        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"5", None));
-        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"6", None));
-        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"7", None));
-        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"8", None));
-        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"9", None));
+        ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"BingX"))
+        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(0)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"1", None));
+        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"2", None));
+        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"3", None));
+        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(3)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"4", None));
+        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(4)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"5", None));
+        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(5)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"6", None));
+        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(6)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"7", None));
+        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(7)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"8", None));
+        ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(8)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"9", None));
 
         # self.box_exchange.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Choose Exchange", None))
         # self.box_exchange.setItemText(0, QCoreApplication.translate("MainWindow", u"CommEX", None))

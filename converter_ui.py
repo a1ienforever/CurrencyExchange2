@@ -99,6 +99,8 @@ class Converter_MainWindow(object):
         self.choose_exchange.addItem("Binance")
         self.choose_exchange.addItem("CommEX")
         self.choose_exchange.addItem("MEXC")
+        self.choose_exchange.addItem("ByBit")
+        self.choose_exchange.addItem("BingX")
 
         self.horizontalLayout_4.addWidget(self.choose_exchange)
 

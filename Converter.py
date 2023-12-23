@@ -59,8 +59,15 @@ class Converter(QMainWindow):
             if select_exchange in value:
                 data_price = requests.get(
                     currencies_list[select_crypt][currencies_list[select_crypt].index(value)]).json()
-                price_crypt = f"{float(data_price['price']):.3f}"
-                return float(price_crypt)
+                if select_exchange == "bybit":
+                    price_crypt = f"{float(data_price['result']['price']):.3f}"
+                    return float(price_crypt)
+                if select_exchange == 'bingx':
+                    price_crypt = f"{float(data_price['data']['price']):.3f}"
+                    return float(price_crypt)
+                else:
+                    price_crypt = f"{float(data_price['price']):.3f}"
+                    return float(price_crypt)
 
     def get_rub(self):
         rub = self.ui.input_rub.text()
