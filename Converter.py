@@ -28,6 +28,7 @@ class Converter(QMainWindow):
         self.ui = converter_ui.Converter_MainWindow()
         self.ui.setupUi(self)
         self.db.start_database()
+        self.table.update_list()
         self.ui.convert_button.clicked.connect(self.set_result)
 
     def parse_usd_price(self):
@@ -103,7 +104,7 @@ class Converter(QMainWindow):
         return f"{datetime} {rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()}"
 
     def record_to_db(self, datetime, rub, usd, crypt):
-        with sqlite3.connect('identifier.sqlite') as db:
+        with sqlite3.connect('database.sqlite') as db:
             cursor = db.cursor()
             cursor.execute(f"SELECT datetime FROM conversion WHERE datetime = '{datetime}'")
             if cursor.fetchone() is None:

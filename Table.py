@@ -12,8 +12,7 @@ class Table(QMainWindow):
         super().__init__()
         self.ui = table_main_window_ui.Table_MainWindow()
         self.ui.setupUi(self)
-        self.update_list()
-        self.ui.delete_button.clicked.connect(self.delete_item)
+        self.ui.delete_button.clicked.connect(self.delete)
 
     def add_item(self, text):
         item = QListWidgetItem(text)
@@ -21,7 +20,7 @@ class Table(QMainWindow):
 
     def update_list(self):
         import sqlite3
-        with sqlite3.connect('identifier.sqlite') as db:
+        with sqlite3.connect('database.sqlite') as db:
             cursor = db.cursor()
             cursor.execute('SELECT * FROM conversion')
             items = cursor.fetchall()
@@ -47,9 +46,10 @@ class Table(QMainWindow):
         date = item[0:16]
         if item:
             import sqlite3
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('database.sqlite') as db:
                 cursor = db.cursor()
                 cursor.execute('DELETE FROM conversion WHERE datetime = ?',(date,))
+                print('Запись удалена!')
 
 
 
