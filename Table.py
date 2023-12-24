@@ -40,7 +40,6 @@ class Table(QMainWindow):
             self.ui.listWidget.takeItem(row)
             self.ui.listWidget.repaint()
 
-
     def delete_from_db(self):
         item = self.ui.listWidget.currentItem().text()
         date = item[0:16]

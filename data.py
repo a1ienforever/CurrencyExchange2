@@ -9,7 +9,7 @@ currencies_list = {
     'ETHUSDT': ['https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT',
                 'https://api.commex.com/api/v1/ticker/price?symbol=ETHUSDT',
                 'https://api.mexc.com/api/v3/ticker/price?symbol=ETHUSDT',
-                'https://api-testnet.bybit.com/spot/v3/public/quote/ticker/price?symbol=ETHUSDT'
+                'https://api-testnet.bybit.com/spot/v3/public/quote/ticker/price?symbol=ETHUSDT',
                 'https://open-api.bingx.com/openApi/swap/v2/quote/price?symbol=ETH-USDT'
                 ],
     'LTCUSDT': [

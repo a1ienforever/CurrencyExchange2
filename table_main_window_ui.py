@@ -84,7 +84,7 @@ class Table_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"List of Exchange", None))
         self.delete_button.setText(QCoreApplication.translate("MainWindow",
                                                             u"Удалить запись",
                                                               None))

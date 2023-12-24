@@ -17,7 +17,6 @@ class Converter(QMainWindow):
     def __init__(self):
         self.table_item = None
         self.table = Table()
-        self.table.setWindowFlag(self.table.windowFlags() | Qt.WindowStaysOnTopHint)
         self.table.show()
         self.usd = None
         self.table_window = None

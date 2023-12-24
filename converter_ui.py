@@ -151,7 +151,7 @@ class Converter_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Converter", None))
         self.header.setText(QCoreApplication.translate("MainWindow", u"Converter", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow",
                                                         u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0443\u043c\u043c\u0443 \u0432 \u0440\u0443\u0431\u043b\u044f\u0445:",
