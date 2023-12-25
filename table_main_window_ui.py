@@ -47,20 +47,20 @@ class Table_MainWindow(object):
         self.delete_button.setMinimumSize(QSize(0, 30))
         self.delete_button.setMaximumSize(QSize(400, 100))
         self.delete_button.setStyleSheet(u"QPushButton{\n"
-                                       "border: 1px solid #ddedfa;\n"
-                                       "border-radius: 3px;\n"
-                                       "padding: 5px;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QPushButton:hover{\n"
-                                       "background: #6bd6ce;\n"
-                                       "color: black;\n"
-                                       "font: bold;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QPushButton:hover:pressed{\n"
-                                       "background: white;\n"
-                                       "}")
+                                         "border: 1px solid #ddedfa;\n"
+                                         "border-radius: 3px;\n"
+                                         "padding: 5px;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "background: #6bd6ce;\n"
+                                         "color: black;\n"
+                                         "font: bold;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover:pressed{\n"
+                                         "background: white;\n"
+                                         "}")
 
         self.horizontalLayout.addWidget(self.delete_button)
 
@@ -86,6 +86,6 @@ class Table_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"List of Exchange", None))
         self.delete_button.setText(QCoreApplication.translate("MainWindow",
-                                                            u"Удалить запись",
+                                                              u"Удалить запись",
                                                               None))
     # retranslateUi

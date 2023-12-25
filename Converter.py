@@ -85,7 +85,7 @@ class Converter(QMainWindow):
         result = usd / name_crypt
         date_time = self.get_datetime()
         self.record_to_db(date_time, rub, usd_price, result)
-        self.table_item = self.get_result(date_time, rub, usd_price, result)
+        self.table_item = self.get_result(date_time, rub, usd, result)
         self.set_lable_text(self.name_bank)
         self.table.add_item(self.table_item)
         return result
@@ -100,7 +100,7 @@ class Converter(QMainWindow):
         return formatted_datetime
 
     def get_result(self, datetime, rub, usd, crypt):
-        return f"{datetime} {rub} rub -> {usd} usd -> {crypt:.5f} {self.select_currency()}"
+        return f"{datetime} {rub} rub -> {usd:.3f} usd -> {crypt:.5f} {self.select_currency()}"
 
     def record_to_db(self, datetime, rub, usd, crypt):
         with sqlite3.connect('database.sqlite') as db:
