@@ -13,7 +13,6 @@ from Converter import Converter
 
 
 class CurrencyExchange(QMainWindow):
-
     def __init__(self):
         self.row = 0
         self.converter = None

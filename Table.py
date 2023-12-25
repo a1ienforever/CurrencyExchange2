@@ -7,7 +7,6 @@ import table_main_window_ui
 
 
 class Table(QMainWindow):
-
     def __init__(self):
         super().__init__()
         self.ui = table_main_window_ui.Table_MainWindow()
